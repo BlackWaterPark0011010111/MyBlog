@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Diary</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(120deg, #4d1bb2, #ff0080, #ff8c00, #40e0d0);
+            background-size: 600% 600%;
+            animation: gradientBackground 16s ease infinite;
+            color: #fff;
+            overflow: hidden;
+        }
+
+        @keyframes gradientBackground {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .container {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            max-width: 500px;
+            width: 100%;
+            z-index: 1;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        input[type="text"], input[type="url"], input[type="date"], input[type="file"], select, textarea {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border-radius: 5px;
+            border: none;
+            box-sizing: border-box;
+        }
+
+        input[type="file"] {
+            padding: 3px;
+        }
+
+        input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            margin-top: 20px;
+            border-radius: 5px;
+            border: none;
+            background: #4d1bb2;
+            color: #fff;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        input[type="submit"]:hover {
+            background: #6d3bb8;
+        }
+
+        .bubbles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .bubble {
+            position: absolute;
+            bottom: -100px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            opacity: 0.7;
+            animation: rise 20s infinite ease-in-out;
+        }
+
+        .bubble:nth-child(1) {
+            width: 40px;
+            height: 40px;
+            left: 10%;
+            animation-duration: 25s;
+        }
+        .bubble:nth-child(2) {
+            width: 20px;
+            height: 20px;
+            left: 20%;
+            animation-duration: 20s;
+            animation-delay: 5s;
+        }
+        .bubble:nth-child(3) {
+            width: 30px;
+            height: 30px;
+            left: 25%;
+            animation-duration: 22s;
+            animation-delay: 2s;
+        }
+        .bubble:nth-child(4) {
+            width: 50px;
+            height: 50px;
+            left: 40%;
+            animation-duration: 18s;
+            animation-delay: 4s;
+        }
+        .bubble:nth-child(5) {
+            width: 25px;
+            height: 25px;
+            left: 55%;
+            animation-duration: 26s;
+            animation-delay: 3s;
+        }
+        .bubble:nth-child(6) {
+            width: 35px;
+            height: 35px;
+            left: 70%;
+            animation-duration: 28s;
+            animation-delay: 1s;
+        }
+        .bubble:nth-child(7) {
+            width: 45px;
+            height: 45px;
+            left: 85%;
+            animation-duration: 24s;
+            animation-delay: 6s;
+        }
+
+        @keyframes rise {
+            0% {
+                transform: translateY(0);
+            }
+            100% {
+                transform: translateY(-2000px);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bubbles">
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+    </div>
+    <div class="container">
+        <h1>Interactive Diary</h1>
+        <form>
+            <label for="entry-title">Entry Title:</label>
+            <input type="text" id="entry-title" name="entry-title" placeholder="Enter your title...">
+
+            <label for="mood">Mood:</label>
+            <select id="mood" name="mood">
+                <option value="happy">Happy</option>
+                <option value="sad">Sad</option>
+                <option value="excited">Excited</option>
+                <option value="angry">Angry</option>
+                <option value="anxious">Anxious</option>
+            </select>
+
+            <label for="entry-date">Entry Date:</label>
+            <input type="date" id="entry-date" name="entry-date">
+
+            <label for="entry-text">Entry Text:</label>
+            <textarea id="entry-text" name="entry-text" rows="4" placeholder="Write your diary entry..."></textarea>
+
+            <label for="link">Add Link:</label>
+            <input type="url" id="link" name="link" placeholder="Enter URL...">
+
+            <label for="link-description">Link Description:</label>
+            <input type="text" id="link-description" name="link-description" placeholder="Describe the link...">
+
+            <label for="remember-people">People to Remember:</label>
+            <input type="text" id="remember-people" name="remember-people" placeholder="Enter names...">
+
+            <label for="image-upload">Upload Image:</label>
+            <input type="file" id="image-upload" name="image-upload" accept="image/*">
+
+            <input type="submit" value="Save Entry">
+        </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diary Application</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: #f0f0f0;
+        }
+        .container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        .container h1 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #555;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        .form-group input[type="text"],
+        .form-group input[type="url"],
+        .form-group select,
+        .form-group textarea {
+            width: calc(100% - 24px);
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+            margin-top: 5px;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+        .form-group input[type="text"]:focus,
+        .form-group input[type="url"]:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: #007bff;
+        }
+        .form-group select {
+            appearance: none;
+            -webkit-appearance: none;
+            background: url('data:image/svg+xml;utf8,<svg fill="%23333" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path d="M7 10l5 5 5-5z"/><path d="M0 0h24v24H0z" fill="none"/></svg>') no-repeat right 10px center/14px 14px;
+            padding-right: 30px;
+        }
+        .form-group textarea {
+            height: 150px;
+            resize: none;
+        }
+        .color-options {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        .color-option {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+            margin: 0 5px;
+            transition: transform 0.3s ease-in-out;
+        }
+        .color-option:hover {
+            transform: scale(1.2);
+        }
+        .color-option.active {
+            border: 2px solid #007bff;
+        }
+        .form-group button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #007BFF;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .form-group button:hover {
+            background-color: #0056b3;
+        }
+        .form-group .success-message {
+            display: none;
+            margin-top: 10px;
+            color: green;
+            font-size: 14px;
+        }
+        .form-group img {
+            max-width: 100%;
+            margin-top: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Add Diary Entry</h1>
+        <form id="diaryForm" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="title">Title</label>
+                <input type="text" id="title" name="title" required>
+            </div>
+            <div class="form-group">
+                <label for="mood">Mood</label>
+                <select id="mood" name="mood" required>
+                    <option value="" disabled selected>Select your mood</option>
+                    <option value="happy">Happy</option>
+                    <option value="sad">Sad</option>
+                    <option value="excited">Excited</option>
+                    <option value="angry">Angry</option>
+                    <option value="nervous">Nervous</option>
+                    <option value="calm">Calm</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="content">Content</label>
+                <textarea id="content" name="content" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="link">Добавь людей, которых ты хочешь запомнить</label>
+                <input type="url" id="link" name="link" required>
+            </div>
+            <div class="color-options">
+                <div class="color-option" style="background-color: #ff6b6b;"></div>
+                <div class="color-option" style="background-color: #ffb966;"></div>
+                <div class="color-option" style="background-color: #a0d468;"></div>
+                <div class="color-option" style="background-color: #4fc1e9;"></div>
+                <div class="color-option" style="background-color: #a889ff;"></div>
+            </div>
+            <div class="form-group">
+                <button type="submit">Add Entry</button>
+                <p class="success-message">Entry added successfully!</p>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
