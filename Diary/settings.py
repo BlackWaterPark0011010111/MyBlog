@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 
 from pathlib import Path
 
+from django.urls import reverse_lazy
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -26,7 +28,14 @@ SECRET_KEY = 'django-insecure-5sb$hax)spxub=g@l*o%um*5qz1xo32bx@i4#y3o!&i4o4qjqq
 DEBUG = True
 
 ALLOWED_HOSTS = []
+##################################################
+AUTH_USER_MODEL = 'diary_app.User'
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
 
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+###################################################
 
 # Application definition
 
@@ -37,6 +46,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'diary_app',
 ]
 
 MIDDLEWARE = [
@@ -50,11 +60,14 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'Diary.urls'
+#######################################################
+# MyDiary/settings.py
 
+##########################################################
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'templates'],#########пупустой список#############
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -74,12 +87,21 @@ WSGI_APPLICATION = 'Diary.wsgi.application'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
 DATABASES = {
-    'default': {
+     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-
+#DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.postgresql',
+#        'NAME': 'my_diary',
+#        'USER': 'my_db_user',
+#        'PASSWORD': 'my_db_password',
+#        'HOST': 'localhost',
+#        'PORT': '5432',
+#    }
+#}
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
@@ -121,3 +143,5 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+# MyDiary/settings.py
+#######################################################
