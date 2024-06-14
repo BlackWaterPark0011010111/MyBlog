@@ -8,6 +8,7 @@ User = get_user_model()
 
 
 @admin.register(User)
-class UserAdmin(UserAdmin):
+class User(UserAdmin):
     pass
+#### require 
 #################################################
