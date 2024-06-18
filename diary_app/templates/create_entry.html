@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Create New Entry</h1>
+<!-- Форма для создания новой записи -->
+<form method="post">
+    {% csrf_token %}
+    <!-- Ваши поля для формы здесь -->
+    <button type="submit" class="btn btn-primary">Create Entry</button>
+</form>
+{% endblock %}

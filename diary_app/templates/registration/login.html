@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% comment %} /*{% extends 'base.html' %}
 
 {% block content %}
     <h1>Login</h1>
@@ -15,4 +15,42 @@
     </form>
 
     <a href="{% url 'password_reset' %}">Forgot password?</a>
+{% endblock %} {% endcomment %}
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h4 class="card-title">Login</h4>
+                </div>
+                <div class="card-body">
+                    {% if form.errors %}
+                        <div class="alert alert-danger" role="alert">
+                            Incorrect username or password. Please try again.
+                        </div>
+                    {% endif %}
+
+                    <form action="{% url 'login' %}" method="post">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label for="username" class="form-label">Username</label>
+                            <input type="text" id="username" name="username" class="form-control" required autofocus>
+                        </div>
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Password</label>
+                            <input type="password" id="password" name="password" class="form-control" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Login</button>
+                    </form>
+                </div>
+                <div class="card-footer text-center">
+                    <small>Forgot password? <a href="{% url 'password_reset' %}">Reset it here</a></small>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}
