@@ -1,3 +1,5 @@
+
+
 {% extends 'base.html' %}
 
 {% block content %}
@@ -81,7 +83,97 @@
 </div>
 {% endblock %}
 
-{% comment %} **************************************************************************** {% endcomment %}
+
+
+
+{% comment %} 
+
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+    body {
+        background: linear-gradient(to bottom, #4A94FF, #0065B3); /* Градиент от голубого к темно-синему */
+        background-image: url(); /* Добавление текстуры */
+        background-size: cover; /* Заполнение всего экрана */
+        background-repeat: no-repeat; /* Не повторять фон */
+        background-attachment: fixed; /* Фиксированный фон */
+        color: #ffffff; /* Цвет текста для лучшей читаемости */
+        overflow-x: hidden; /* Скрыть горизонтальный скролл */
+    }
+
+    .container {
+        margin-top: 100px; /* Отступ сверху для контента */
+    }
+
+    .card {
+        background-color: rgba(255, 255, 255, 0.8); /* Белый фон с прозрачностью */
+        box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1); /* Тень для карточки */
+        transition: transform 0.3s ease; /* Анимация при наведении */
+    }
+
+    .card:hover {
+        transform: translateY(-5px); /* Поднять карточку при наведении */
+    }
+
+    .card-header {
+        background-color: rgba(0, 0, 0, 0.3); /* Прозрачный черный фон для заголовка карточки */
+    }
+
+    .jumbotron {
+        background-color: rgba(0, 0, 0, 0.5); /* Полупрозрачный черный фон для jumbotron */
+        padding: 2rem;
+        margin-bottom: 3rem;
+    }
+
+    .jumbotron h1 {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+    }
+
+    .jumbotron p {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+    }
+</style>
+
+<div class="container mt-5">
+    <div class="jumbotron text-center">
+        <h1>Welcome to MyBlog</h1>
+        <p>Explore your thoughts and memories</p>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6 mb-4">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h4 class="card-title">Latest Entries</h4>
+                </div>
+                <div class="card-body">
+                    <p>Your latest diary entries will be displayed here.</p>
+                    <a href="#" class="btn btn-info">View all entries</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 mb-4">
+            <div class="card">
+                <div class="card-header bg-success text-white">
+                    <h4 class="card-title">Add New Entry</h4>
+                </div>
+                <div class="card-body">
+                    <p>Start a new entry and capture your thoughts.</p>
+                    <a href="#" class="btn btn-primary">Create new entry</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} {% endcomment %}
+
+
+
+
 {% comment %} {% extends 'base.html' %}
 
 {% block content %}

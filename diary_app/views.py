@@ -15,9 +15,26 @@ from django.contrib.auth import authenticate, login
 from django.views import View
 from django.shortcuts import render, redirect
 from django.contrib.auth import logout
-
+from django.contrib.auth.decorators import login_required
+from .models import Entry
+from .forms import EntryForm
 from diary_app.forms import UserCreationForm
+from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
+from .models import Post
 
+def all_posts(request):
+    posts = Post.objects.all()
+    return render(request, 'blog/all_posts.html', {'posts': posts})
+
+@login_required
+def home(request):
+    return render(request, 'diary_app/home.html')
+
+@login_required
+def all_entries(request):
+    entries = Entry.objects.filter(author=request.user)
+    return render(request, 'diary_app/all_entries.html', {'entries': entries})
 
 class Register(View):
     template_name = 'registration/register.html'
@@ -48,24 +65,15 @@ def logout_view(request):
     return redirect('home') 
 # diary_app/views.py
 
-from django.shortcuts import render
-from django.contrib.auth.decorators import login_required
-
-@login_required
-def home(request):
-    return render(request, 'diary_app/home.html')
-
-@login_required
-def all_entries(request):
-    # Логика для получения всех записей пользователя и их отображения
-    return render(request, 'diary_app/all_entries.html')
-
 @login_required
 def create_entry(request):
-    # Логика для создания новой записи
     if request.method == 'POST':
-        # Обработка формы создания записи
-        pass  # Ваш код обработки формы здесь
-
-    # Если метод GET, просто отображаем форму создания записи
-    return render(request, 'diary_app/create_entry.html')
+        form = EntryForm(request.POST)
+        if form.is_valid():
+            entry = form.save(commit=False)
+            entry.author = request.user
+            entry.save()
+            return redirect('home')
+    else:
+        form = EntryForm()
+    return render(request, 'diary_app/create_entry.html', {'form': form})
