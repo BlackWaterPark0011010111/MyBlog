@@ -68,7 +68,7 @@ ROOT_URLCONF = 'Diary.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates'],#########пупустой список#############
+        'DIRS': [BASE_DIR /'Templates'],#########пупустой список#############
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

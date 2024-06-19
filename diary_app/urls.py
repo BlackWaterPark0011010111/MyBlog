@@ -20,7 +20,7 @@ from diary_app.views import Register, create_entry
 urlpatterns = [
     path('', include('django.contrib.auth.urls')),
     path('all_entries/', views.all_entries, name='all_entries'),
-    path('create-entry/', views.create_entry, name='create_entry'),
+    path('create_entry/', views.create_entry, name='create_entry'),
     path('register/', Register.as_view(), name='register'),
     path('logout/', views.logout_view, name='logout'),
   

@@ -61,21 +61,34 @@
                 <div class="card-header bg-primary text-white">
                     <h4 class="card-title">Latest Entries</h4>
                 </div>
-                <div class="card-body">
+                <div class="card-body"> 
+                    <title>Input</title>
                     <p>Your latest diary entries will be displayed here.</p>
-                    <a href="#" class="btn btn-info">View all entries</a>
+                    {% if posts %}
+                     {{posts.data.title}}
+                      {{posts.author}}
+                    {% endif %}
+                    <a href= "diary_app/all_entries/"class="btn btn-info">View all entries</a>
+                   
+                </head>
+            <body>
+            </h2>Input form</h2>
+                </head>
                 </div>
             </div>
         </div>
 
         <div class="col-md-6 mb-4">
             <div class="card">
+
                 <div class="card-header bg-success text-white">
                     <h4 class="card-title">Add New Entry</h4>
                 </div>
+
                 <div class="card-body">
                     <p>Start a new entry and capture your thoughts.</p>
-                    <a href="#" class="btn btn-primary">Create new entry</a>
+
+                    <a href="diary_app/create_entry/" class="btn btn-primary">Create new entry</a>
                 </div>
             </div>
         </div>

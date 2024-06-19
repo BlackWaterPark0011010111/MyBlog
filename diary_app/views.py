@@ -22,10 +22,13 @@ from diary_app.forms import UserCreationForm
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from .models import Post
+from django.http import HttpResponse
 
-def all_posts(request):
-    posts = Post.objects.all()
-    return render(request, 'blog/all_posts.html', {'posts': posts})
+  
+
+#def all_posts(request):
+#    posts = Post.objects.all()
+#    return render(request, 'home.html', {'posts': posts})
 
 @login_required
 def home(request):
@@ -33,8 +36,11 @@ def home(request):
 
 @login_required
 def all_entries(request):
-    entries = Entry.objects.filter(author=request.user)
-    return render(request, 'diary_app/all_entries.html', {'entries': entries})
+    entries = Entry.objects.all()  
+    print('..............',entries)
+
+    return render(request, 'home.html', {'posts': entries})
+    
 
 class Register(View):
     template_name = 'registration/register.html'
@@ -76,4 +82,4 @@ def create_entry(request):
             return redirect('home')
     else:
         form = EntryForm()
-    return render(request, 'diary_app/create_entry.html', {'form': form})
+    return render(request, 'create_entry.html', {'form': form})     # return HttpResponse('<h1>Hello HttpResponse</h1>')  для тестинга 
