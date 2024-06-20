@@ -1,58 +1,11 @@
-
-
 {% extends 'base.html' %}
+{% load static %}
 
 {% block content %}
-<style>
-    body {
-        background: linear-gradient(to bottom, #4A94FF, #0065B3); /* Градиент от голубого к темно-синему */
-        background-image: url(); /* Добавление текстуры */
-        background-size: cover; /* Заполнение всего экрана */
-        background-repeat: no-repeat; /* Не повторять фон */
-        background-attachment: fixed; /* Фиксированный фон */
-        color: #ffffff; /* Цвет текста для лучшей читаемости */
-        overflow-x: hidden; /* Скрыть горизонтальный скролл */
-    }
-
-    .container {
-        margin-top: 100px; /* Отступ сверху для контента */
-    }
-
-    .card {
-        background-color: rgba(255, 255, 255, 0.8); /* Белый фон с прозрачностью */
-        box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1); /* Тень для карточки */
-        transition: transform 0.3s ease; /* Анимация при наведении */
-    }
-
-    .card:hover {
-        transform: translateY(-5px); /* Поднять карточку при наведении */
-    }
-
-    .card-header {
-        background-color: rgba(0, 0, 0, 0.3); /* Прозрачный черный фон для заголовка карточки */
-    }
-
-    .jumbotron {
-        background-color: rgba(0, 0, 0, 0.5); /* Полупрозрачный черный фон для jumbotron */
-        padding: 2rem;
-        margin-bottom: 3rem;
-    }
-
-    .jumbotron h1 {
-        font-size: 3rem;
-        margin-bottom: 1rem;
-    }
-
-    .jumbotron p {
-        font-size: 1.5rem;
-        margin-bottom: 1rem;
-    }
-</style>
-
 <div class="container mt-5">
     <div class="jumbotron text-center">
         <h1>Welcome to MyBlog</h1>
-        <p>Explore your thoughts and memories</p>
+        <p>Your personal space for expressing thoughts and memories</p>
     </div>
 
     <div class="row">
@@ -61,41 +14,35 @@
                 <div class="card-header bg-primary text-white">
                     <h4 class="card-title">Latest Entries</h4>
                 </div>
-                <div class="card-body"> 
-                    <title>Input</title>
-                    <p>Your latest diary entries will be displayed here.</p>
+                <div class="card-body">
                     {% if posts %}
-                     {{posts.data.title}}
-                      {{posts.author}}
+                        <ul>
+                            {% for post in posts %}
+                                <li>{{ post.title }} - {{ post.author }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% else %}
+                        <p>No entries found.</p>
                     {% endif %}
-                    <a href= "diary_app/all_entries/"class="btn btn-info">View all entries</a>
-                   
-                </head>
-            <body>
-            </h2>Input form</h2>
-                </head>
+                    <a href="{% url 'all_entries' %}" class="btn btn-info">View all entries</a>
                 </div>
             </div>
         </div>
 
         <div class="col-md-6 mb-4">
             <div class="card">
-
                 <div class="card-header bg-success text-white">
                     <h4 class="card-title">Add New Entry</h4>
                 </div>
-
                 <div class="card-body">
                     <p>Start a new entry and capture your thoughts.</p>
-
-                    <a href="diary_app/create_entry/" class="btn btn-primary">Create new entry</a>
+                    <a href="{% url 'create_entry' %}" class="btn btn-info">Create new entry</a>
                 </div>
             </div>
         </div>
     </div>
 </div>
 {% endblock %}
-
 
 
 
