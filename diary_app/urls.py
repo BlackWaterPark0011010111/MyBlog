@@ -12,10 +12,10 @@
 
 
 ##################################################
-from django import views
+
 from django.urls import path, include
-from . import views
 from diary_app.views import Register, create_entry
+from . import views
 
 urlpatterns = [
     path('', include('django.contrib.auth.urls')),
@@ -23,7 +23,7 @@ urlpatterns = [
     path('all_entries/', views.all_entries, name='all_entries'),
     path('create_entry/', views.create_entry, name='create_entry'),
     path('templates/register/', Register.as_view(), name='register'),
-  
+    
     path('entries/new/', create_entry, name='create_entry'),
 ]
 ##################################################

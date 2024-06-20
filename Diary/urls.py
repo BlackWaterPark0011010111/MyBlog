@@ -28,6 +28,9 @@ urlpatterns = [
     path('', TemplateView.as_view(template_name='home.html'), name='home'),
     path('logout/', views.logout_view, name='logout'),
     path('diary_app/', include('diary_app.urls')),
+    
 #############################################
 
-]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+]
+if settings.DEBUG:
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
