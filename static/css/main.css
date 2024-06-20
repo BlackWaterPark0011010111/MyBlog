@@ -1,0 +1,158 @@
+/* Background styles */
+body {
+    background: linear-gradient(to bottom, #0c57c1, #0065B3);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    color: #ffffff;
+    overflow-x: hidden;
+    font-family: 'Arial', sans-serif;
+    animation: backgroundAnimation 10s infinite alternate;
+}
+
+/* Keyframes for background animation */
+@keyframes backgroundAnimation {
+    0% {
+        background-color: #0c57c1;
+    }
+    50% {
+        background-color: #0065B3;
+    }
+    100% {
+        background-color: #0c57c1;
+    }
+}
+
+/* Container styles */
+.container {
+    margin-top: 100px;
+}
+
+/* Card styles */
+.card {
+    background-color: rgba(0, 0, 0, 0.8);
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.7);
+}
+
+.card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.1);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.card:hover::before {
+    opacity: 1;
+}
+
+/* Card header styles */
+.card-header {
+    background-color: rgba(0, 0, 0, 0.3);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Jumbotron styles */
+.jumbotron {
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 2rem;
+    margin-bottom: 3rem;
+    border-radius: 10px;
+    animation: fadeIn 2s;
+    text-align: center;
+}
+
+.jumbotron h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    animation: textShadowPulse 2s infinite;
+}
+
+.jumbotron p {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    animation: fadeIn 3s;
+}
+
+/* Button styles */
+.btn-info {
+    background-color: #4A94FF;
+    border: none;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.btn-info:hover {
+    background-color: #3f4244;
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+}
+
+/* Fade-in animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* Text Shadow Pulse effect */
+@keyframes textShadowPulse {
+    0% {
+        text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 20px #00f, 0 0 30px #00f, 0 0 40px #00f, 0 0 50px #00f, 0 0 75px #00f;
+    }
+    100% {
+        text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #00f, 0 0 50px #00f, 0 0 60px #00f, 0 0 70px #00f, 0 0 100px #00f;
+    }
+}
+
+/* Flashing text effect */
+@keyframes flash {
+    0% { opacity: 1; }
+    50% { opacity: 0.5; }
+    100% { opacity: 1; }
+}
+
+.flash-text {
+    animation: flash 1s infinite;
+}
+
+/* Button Ripple effect */
+.btn {
+    position: relative;
+    overflow: hidden;
+}
+
+.btn::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100px;
+    height: 100px;
+    background: rgba(255, 255, 255, 0.3);
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(1);
+    border-radius: 50%;
+    transition: transform 0.5s, opacity 1s;
+}
+
+.btn:active::after {
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 1;
+    transition: 0s;
+}

@@ -11,10 +11,10 @@
 
 
 ##################################################
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.views import View
 from django.shortcuts import render, redirect
-from django.contrib.auth import logout
+
 from django.contrib.auth.decorators import login_required
 from .models import Entry
 from .forms import EntryForm
@@ -23,6 +23,7 @@ from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from .models import Post
 from django.http import HttpResponse
+
 
   
 
@@ -39,7 +40,7 @@ def all_entries(request):
     entries = Entry.objects.all()  
     print('..............',entries)
 
-    return render(request, 'home.html', {'posts': entries})
+    return render(request, 'diary_app/home.html', {'posts': entries})
     
 
 class Register(View):
