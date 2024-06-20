@@ -84,3 +84,4 @@ def create_entry(request):
     else:
         form = EntryForm()
     return render(request, 'create_entry.html', {'form': form})     # return HttpResponse('<h1>Hello HttpResponse</h1>')  для тестинга 
+#if user is not loged  or registered in rederect to the login   page 
