@@ -22,12 +22,14 @@ from django.views.generic import TemplateView
 from django.conf import settings
 from django.conf.urls.static import static
 from diary_app import views
+from diary_app.views import home
 urlpatterns = [
     path('admin/', admin.site.urls),
 ############################################
     path('', TemplateView.as_view(template_name='home.html'), name='home'),
     path('logout/', views.logout_view, name='logout'),
     path('diary_app/', include('diary_app.urls')),
+    path('', home, name='home'),
     
 #############################################
 

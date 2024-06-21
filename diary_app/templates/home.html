@@ -1,4 +1,91 @@
-{% extends 'base.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}MY BLOG{% endblock %}</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="{% url 'home' %}">My Site</a>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'login' %}">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'register' %}">Register</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        {% block content %}
+            {% if user.is_authenticated %}
+                <div class="jumbotron text-center">
+                    <h1>Welcome to MyBlog</h1>
+                    <p>Explore your thoughts and memories</p>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6 mb-4">
+                        <div class="card">
+                            <div class="card-header bg-primary text-white">
+                                <h4 class="card-title">Latest Entries</h4>
+                            </div>
+                            <div class="card-body">
+                                <p>Your latest diary entries will be displayed here.</p>
+                                {% if posts %}
+                                    <ul>
+                                        {% for post in posts %}
+                                            <li>{{ post.title }} by {{ post.author }} on {{ post.publish }}</li>
+                                        {% endfor %}
+                                    </ul>
+                                {% else %}
+                                    <p>No entries available.</p>
+                                {% endif %}
+                                <a href="{% url 'all_entries' %}" class="btn btn-info">View all entries</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 mb-4">
+                        <div class="card">
+                            <div class="card-header bg-success text-white">
+                                <h4 class="card-title">Add New Entry</h4>
+                            </div>
+                            <div class="card-body">
+                                <p>Start a new entry and capture your thoughts.</p>
+                                <a href="{% url 'create_entry' %}" class="btn btn-primary">Create new entry</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% else %}
+                <div class="jumbotron text-center">
+                    <h1>Welcome to MyBlog</h1>
+                    <p>Please log in or register to explore your thoughts and memories.</p>
+                    <a href="{% url 'login' %}" class="btn btn-primary">Login</a>
+                    <a href="{% url 'register' %}" class="btn btn-secondary">Register</a>
+                </div>
+            {% endif %}
+        {% endblock %}
+    </div>
+</body>
+</html>
+
+
+{% comment %} {% extends 'base.html' %}
 {% load static %}
 
 {% block content %}
@@ -43,6 +130,26 @@
     </div>
 </div>
 {% endblock %}
+
+
+ {% endcomment %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

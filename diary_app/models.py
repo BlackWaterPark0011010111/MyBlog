@@ -15,7 +15,7 @@ class Entry(models.Model):
         return self.title
     class Meta:
         ordering = ['-date_created']  
-        #Сортировка записей по дате 
+        
 
 class Post(models.Model):
     title = models.CharField(max_length=200)

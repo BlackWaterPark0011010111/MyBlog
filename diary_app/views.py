@@ -8,31 +8,58 @@
     #diary_app/views.py
 
 # diary_app/views.py
-
+"""add name ensteed mysite, logo , user picture,""" 
 
 ##################################################
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.forms import PasswordResetForm,UserCreationForm
+from django.contrib.auth.decorators import login_required
 from django.views import View
 from django.shortcuts import render, redirect
-
-from django.contrib.auth.decorators import login_required
+from django.http import HttpResponse
+from django.contrib.auth import authenticate, login
 from .models import Entry
 from .forms import EntryForm
 from diary_app.forms import UserCreationForm
-from django.shortcuts import render
 from .models import Post
+from django.shortcuts import render
 from django.http import HttpResponse
+import logging
+logger = logging.getLogger(__name__)
+
+def password_reset_view(request):
+    logger.debug('Password reset view called')
+    
+    if request.method == 'POST':
+        logger.debug('POST request received')
+        form = PasswordResetForm(request.POST)
+        if form.is_valid():
+            form.save()
+            logger.debug('Form is valid')
+            return render(request, 'password_reset_done.html')
+        else:
+            logger.debug('Form is invalid')
+    else:
+        logger.debug('GET request received')
+        form = PasswordResetForm()
+
+    return render(request, 'password_reset.html', {'form': form})
 
 
-  
 
-#def all_posts(request):
-#    posts = Post.objects.all()
-#    return render(request, 'home.html', {'posts': posts})
+def password_reset_done(request):
+    logger.debug('Password reset done view called')
+    return render(request, 'password_reset_done.html')  
+
 
 @login_required
 def home(request):
-    return render(request, 'diary_app/home.html')
+    posts = Entry.objects.filter(author=request.user)
+    return render(request, 'home.html', {'posts': posts})
+#@login_required
+#def home(request):
+#    posts = Post.objects.all().order_by('-publish')[:5]  # Получить последние 5 записей, отсортированных по дате публикации
+#    return render(request, 'home.html', {'posts': posts})
 
 @login_required
 def all_entries(request):
@@ -41,10 +68,7 @@ def all_entries(request):
 
     return render(request, 'diary_app/home.html', {'posts': entries})
     
-from django.shortcuts import render, redirect
-from django.views import View
-from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth import authenticate, login
+
 
 class Register(View):
     template_name = 'registration/register.html'
@@ -112,3 +136,6 @@ def create_entry(request):
         form = EntryForm()
     return render(request, 'create_entry.html', {'form': form})     # return HttpResponse('<h1>Hello HttpResponse</h1>')  для тестинга 
 #if user is not loged  or registered in rederect to the login   page 
+#def all_posts(request):
+#    posts = Post.objects.all()
+#    return render(request, 'home.html', {'posts': posts})
