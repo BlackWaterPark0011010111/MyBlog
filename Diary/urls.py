@@ -30,7 +30,8 @@ urlpatterns = [
     path('logout/', views.logout_view, name='logout'),
     path('diary_app/', include('diary_app.urls')),
     path('', home, name='home'),
-    
+    path('password_reset/done/', views.password_reset_done, name='password_reset_done'),
+
 #############################################
 
 ]

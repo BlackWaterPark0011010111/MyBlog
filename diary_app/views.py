@@ -22,10 +22,32 @@ from .models import Entry
 from .forms import EntryForm
 from diary_app.forms import UserCreationForm
 from .models import Post
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 import logging
+from .forms import SearchForm
 logger = logging.getLogger(__name__)
+
+def entry_detail(request, entry_id):
+    entry = get_object_or_404(Entry, id=entry_id)
+    return render(request, 'entry_detail.html', {'entry': entry})
+
+
+
+def search_entries(request):
+    query = request.GET.get('query')
+    if query:
+        results = Entry.objects.filter(title__icontains=query)  # Пример поиска по заголовку
+    else:
+        results = Entry.objects.none()
+    return render(request, 'search_results.html', {'results': results})
+
+#ef search_entries(request):
+#   query = request.GET.get('query')
+#   entries = Entry.objects.filter(title__icontains=query) | Entry.objects.filter(content__icontains=query)
+#   return render(request, 'search_results.html', {'entries': entries, 'query': query})
+
+
 
 def password_reset_view(request):
     logger.debug('Password reset view called')

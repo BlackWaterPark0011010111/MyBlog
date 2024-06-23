@@ -13,9 +13,18 @@
         <a class="navbar-brand" href="{% url 'home' %}">My Site</a>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <form class="form-inline search-form" method="get" action="{% url 'search_entries' %}">
+                        <input class="form-control mr-sm-2 search-input" type="search" placeholder="Search" aria-label="Search" name="query">
+                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                    </form>
+                </li>
                 {% if user.is_authenticated %}
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+                        <form method="post" action="{% url 'logout' %}">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-link nav-link">Logout</button>
+                        </form>
                     </li>
                 {% else %}
                     <li class="nav-item">
@@ -31,53 +40,24 @@
 
     <div class="container mt-5">
         {% block content %}
-            {% if user.is_authenticated %}
-                <div class="jumbotron text-center">
-                    <h1>Welcome to MyBlog</h1>
-                    <p>Explore your thoughts and memories</p>
-                </div>
-
-                <div class="row">
-                    <div class="col-md-6 mb-4">
-                        <div class="card">
-                            <div class="card-header bg-primary text-white">
-                                <h4 class="card-title">Latest Entries</h4>
-                            </div>
-                            <div class="card-body">
-                                <p>Your latest diary entries will be displayed here.</p>
-                                {% if posts %}
-                                    {{ posts.data.title }}
-                                    {{ posts.author }}
-                                {% endif %}
-                                <a href="diary_app/all_entries/" class="btn btn-info">View all entries</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-6 mb-4">
-                        <div class="card">
-                            <div class="card-header bg-success text-white">
-                                <h4 class="card-title">Add New Entry</h4>
-                            </div>
-                            <div class="card-body">
-                                <p>Start a new entry and capture your thoughts.</p>
-                                <a href="diary_app/create_entry/" class="btn btn-primary">Create new entry</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            {% else %}
-                <div class="jumbotron text-center">
-                    <h1>Welcome to MyBlog</h1>
-                    <p>Please log in or register to explore your thoughts and memories.</p>
-                    <a href="{% url 'login' %}" class="btn btn-primary">Login</a>
-                    <a href="{% url 'register' %}" class="btn btn-secondary">Register</a>
-                </div>
-            {% endif %}
         {% endblock %}
     </div>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 {% comment %} {% load static %}
 <!DOCTYPE html>
@@ -115,4 +95,4 @@
         {% block content %}{% endblock %}
     </div>
 </body>
-</html> {% endcomment %}
+</html> {% endcomment %} 

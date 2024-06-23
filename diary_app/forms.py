@@ -19,7 +19,9 @@ class EntryForm(forms.ModelForm):
     class Meta:
         model = Entry
         fields = ['title', 'content']
-
+class SearchForm(forms.Form):
+    query = forms.CharField(label='Search', max_length=100)
+    
 class UserCreationForm(UserCreationForm):
     email = forms.EmailField(
         label=_("Email"),
