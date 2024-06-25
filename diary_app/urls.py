@@ -14,19 +14,19 @@
 ##################################################
 
 from django.urls import path, include
-from diary_app.views import Register, create_entry
+from diary_app.views import Register, create_entry,home,password_reset_view
 from django.contrib import admin
 from . import views
-from diary_app.views import password_reset_view
+
 
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
     path('', include('django.contrib.auth.urls')),
+    #path('admin/', admin.site.urls),
     #path('templates/logout/', views.logout_view, name='logout'),
     path('search/', views.search_entries, name='search_entries'),
     path('templates/logout/', views.logout_view, name='logout'),
-
+    path('templates/home/', home, name='home'),
     path('all_entries/', views.all_entries, name='all_entries'),
     path('create_entry/', views.create_entry, name='create_entry'),
     path('register/', views.Register.as_view(), name='register'),

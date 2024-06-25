@@ -31,8 +31,10 @@ DEBUG = True
 ALLOWED_HOSTS = []
 ##################################################
 #AUTH_USER_MODEL = 'diary_app.User'
-LOGIN_REDIRECT_URL = '/'
-LOGOUT_REDIRECT_URL = '/'
+LOGIN_URL = 'login'
+LOGIN_REDIRECT_URL = 'home'
+LOGOUT_REDIRECT_URL = 'login'
+
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
@@ -58,6 +60,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'diary_app.middleware.LoginRequiredMiddleware', 
 ]
 
 ROOT_URLCONF = 'Diary.urls'

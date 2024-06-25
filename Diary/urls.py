@@ -25,15 +25,11 @@ from diary_app import views
 from diary_app.views import home
 urlpatterns = [
     path('admin/', admin.site.urls),
-############################################
-    path('', TemplateView.as_view(template_name='home.html'), name='home'),
+    path('', views.index, name='index'),  # Главная страница
+    path('home/', home, name='home'),  # Главная страница после входа
     path('logout/', views.logout_view, name='logout'),
-    path('diary_app/', include('diary_app.urls')),
-    path('', home, name='home'),
+    path('diary_app/', include('diary_app.urls')),  # Подключаем URLы из приложения diary_app
     path('password_reset/done/', views.password_reset_done, name='password_reset_done'),
-
-#############################################
-
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
