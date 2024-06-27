@@ -14,14 +14,23 @@ from .models import Entry
 
 
 User = get_user_model()
-
 class EntryForm(forms.ModelForm):
     class Meta:
         model = Entry
-        fields = ['title', 'content']
+        fields = ['title', 'text', 'published_date', 'image', 'people_links']
+        widgets = {
+            'published_date': forms.DateTimeInput(attrs={'type': 'datetime-local'}),
+        }
+        # Исключаем поле author из формы, чтобы его значение не редактировалось
+        exclude = ['author']
+#class EntryForm(forms.ModelForm):
+#    class Meta:
+#        model = Entry
+#        fields = ['title', 'text', 'published_date', 'author', 'image', 'people_links']#
+
 class SearchForm(forms.Form):
     query = forms.CharField(label='Search', max_length=100)
-    
+
 class UserCreationForm(UserCreationForm):
     email = forms.EmailField(
         label=_("Email"),
@@ -31,5 +40,4 @@ class UserCreationForm(UserCreationForm):
 
     class Meta(UserCreationForm.Meta):
         model = User
-        fields = ("username", "email")
-##################################################
+        fields = ("username", "email")#######

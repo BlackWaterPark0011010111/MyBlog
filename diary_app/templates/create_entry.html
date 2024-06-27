@@ -1,90 +1,182 @@
 {% extends 'base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <title>{% block title %}My Site{% endblock %}</title>
-    
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-</head>
-<body>
-        My Site
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
 
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ml-auto">
-                {% if user.is_authenticated %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'logout' %}">Logout</a>
-                    </li>
-                {% else %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'login' %}">Login</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'register' %}">Register</a>
-                    </li>
-                    
-                {% endif %}
-            </ul>
+{% block content %}
+<div class="container mt-5">
+    <h1 class="mb-4">Creating New Report</h1>
+
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        
+        <div class="form-group">
+            <label for="id_title">Title:</label>
+            <input type="text" class="form-control" id="id_title" name="title" required>
         </div>
-    </nav>
 
-    {% block content %}
-    <div class="container mt-5">
+        <div class="form-group">
+            <label for="id_text">Text:</label>
+            <textarea class="form-control" id="id_text" name="text" rows="4" required></textarea>
+        </div>
 
-        <h1>Creating New Report</h1>  
-          
-            <form method="post" enctype="multipart/form-data">
-                {% csrf_token %}
-                
-                <div class="form-group">
-                    <label for="id_title">Title:</label>
-                    <input type="text" class="form-control" id="id_title" name="title" required>
-                </div>
-        
-                <div class="form-group">
-                    <label for="id_text">Text:</label>
-                    <textarea class="form-control" id="id_text" name="text" rows="4" required></textarea>
-                </div>
-        
-                <div class="form-group">
-                    <label for="id_created_date">Created Date:</label>
-                    <input type="datetime-local" class="form-control" id="id_created_date" name="created_date" required>
-                </div>
-        
-                <div class="form-group">
-                    <label for="id_published_date">Published Date:</label>
-                    <input type="datetime-local" class="form-control" id="id_published_date" name="published_date">
-                </div>
-        
-                <div class="form-group">
-                    <label for="id_author">Author:</label>
-                    <input type="text" class="form-control" id="id_author" name="author" value="{{ user.username }}" readonly>
-                </div>
-        
-                <div class="form-group">
-                    <label for="id_image">Image:</label>
-                    <input type="file" class="form-control-file" id="id_image" name="image">
-                </div>
-        
-                <div class="form-group">
-                    <label for="id_people_links">People Links:</label>
-                    <input type="text" class="form-control" id="id_people_links" name="people_links">
-                </div>
-        
-                <button type="submit" class="btn btn-primary">Create Entry</button>
-            
-<!-- Форма для создания новой записи -->
-<form method="post">
-    {% csrf_token %}
-    <!-- Ваши поля для формы здесь -->
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="id_created_date">Created Date:</label>
+                <input type="datetime-local" class="form-control" id="id_created_date" name="created_date" required>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="id_published_date">Published Date:</label>
+                <input type="datetime-local" class="form-control" id="id_published_date" name="published_date">
+            </div>
+        </div>
 
-</form>
+        <div class="form-group">
+            <label for="id_author">Author:</label>
+            <input type="text" class="form-control" id="id_author" name="author" value="{{ user.username }}" readonly>
+        </div>
+
+        <div class="form-group">
+            <label for="id_image">Image:</label>
+            <input type="file" class="form-control-file" id="id_image" name="image">
+        </div>
+
+        <div class="form-group">
+            <label for="id_people_links">People Links:</label>
+            <input type="text" class="form-control" id="id_people_links" name="people_links">
+        </div>
+
+        <button type="submit" class="btn btn-primary">Create Entry</button>
+    </form>
 </div>
-</body>
-</html>
+{% endblock %}
+
+
+{% comment %} {% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1 class="mb-4">Creating New Report</h1>
+
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        
+        <div class="form-group">
+            <label for="id_title">Title:</label>
+            <input type="text" class="form-control" id="id_title" name="title" required>
+        </div>
+
+        <div class="form-group">
+            <label for="id_text">Text:</label>
+            <textarea class="form-control" id="id_text" name="text" rows="4" required></textarea>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="id_created_date">Created Date:</label>
+                <input type="datetime-local" class="form-control" id="id_created_date" name="created_date" required>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="id_published_date">Published Date:</label>
+                <input type="datetime-local" class="form-control" id="id_published_date" name="published_date">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="id_author">Author:</label>
+            <input type="text" class="form-control" id="id_author" name="author" value="{{ user.username }}" readonly>
+        </div>
+
+        <div class="form-group">
+            <label for="id_image">Image:</label>
+            <input type="file" class="form-control-file" id="id_image" name="image">
+        </div>
+
+        <div class="form-group">
+            <label for="id_people_links">People Links:</label>
+            <input type="text" class="form-control" id="id_people_links" name="people_links">
+        </div>
+
+        <button type="submit" class="btn btn-primary">Create Entry</button>
+    </form>
+</div>
 {% endblock %} 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% comment %} {% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1 class="mb-4">Creating New Report</h1>
+
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        
+        <div class="form-group">
+            <label for="id_title">Title:</label>
+            <input type="text" class="form-control" id="id_title" name="title" required>
+        </div>
+
+        <div class="form-group">
+            <label for="id_text">Text:</label>
+            <textarea class="form-control" id="id_text" name="text" rows="4" required></textarea>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="id_created_date">Created Date:</label>
+                <input type="datetime-local" class="form-control" id="id_created_date" name="created_date" required>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="id_published_date">Published Date:</label>
+                <input type="datetime-local" class="form-control" id="id_published_date" name="published_date">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="id_author">Author:</label>
+            <input type="text" class="form-control" id="id_author" name="author" value="{{ user.username }}" readonly>
+        </div>
+
+        <div class="form-group">
+            <label for="id_image">Image:</label>
+            <input type="file" class="form-control-file" id="id_image" name="image">
+        </div>
+
+        <div class="form-group">
+            <label for="id_people_links">People Links:</label>
+            <input type="text" class="form-control" id="id_people_links" name="people_links">
+        </div>
+
+        <button type="submit" class="btn btn-primary">Create Entry</button>
+    </form>
+</div>
+{% endblock %} {% endcomment %}

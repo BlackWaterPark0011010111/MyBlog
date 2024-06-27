@@ -1,6 +1,38 @@
-
 {% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header bg-primary text-white">
+                        <h1 class="text-center">Login</h1>
+                    </div>
+                    <div class="card-body">
+                        {% if form.errors %}
+                            <div class="alert alert-danger">
+                                <strong>Error!</strong> {{ form.errors.error }}
+                            </div>
+                        {% endif %}
 
+                        <form action="{% url 'login' %}" method="post">
+                            {% csrf_token %}
+                            {{ form }}
+                            <button type="submit" class="btn btn-primary btn-block mt-3">Login</button>
+                        </form>
+                        <hr>
+                        <p class="text-center"><a href="{% url 'password_reset' %}">Forgot password?</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+
+
+{% comment %} {% extends 'base.html' %}
+{% load static %}
 {% block content %}
     <h1>Login</h1>
     <hr>
@@ -16,7 +48,50 @@
     </form>
 
     <a href="{% url 'password_reset' %}">Forgot password?</a>
-{% endblock %}
+{% endblock %} {% endcomment %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 {% comment %} <!DOCTYPE html>
 <html lang="en">
 <head>

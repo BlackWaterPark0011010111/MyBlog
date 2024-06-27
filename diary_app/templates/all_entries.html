@@ -2,13 +2,9 @@
 {% block content %}
 <h1>All Entries</h1>
 
-<style>
-   
-</style>
-
 <div class="container mt-5">
     <div class="jumbotron text-center">
-        <h1>My Diary Entries</h1>
+        <h1>My Blog Entries</h1>
         <p>All your diary entries in one place</p>
     </div>
 
@@ -18,11 +14,11 @@
                 <div class="card">
                     <div class="card-header bg-primary text-white">
                         <h4 class="card-title">{{ entry.title }}</h4>
-                        <small>Created on {{ entry.date_created }}</small>
+                        <small>Created on {{ entry.created_date }}</small> <!-- Заменил date_created на created_date -->
                     </div>
                     <div class="card-body">
-                        <p>{{ entry.content|truncatewords:30 }}</p>
-                        <a href= class="btn btn-info">Read More</a>
+                        <p>{{ entry.text|truncatewords:30 }}</p> <!-- Заменил content на text -->
+                        <a href="{% url 'all_entries' %}" class="btn btn-info" target="_blank">Read More</a>
                     </div>
                 </div>
             </div>
@@ -36,6 +32,3 @@
     {% endif %}
 </div>
 {% endblock %}
-
-<!-- Здесь можно отобразить все записи пользователя -->
-

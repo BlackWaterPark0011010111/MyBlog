@@ -1,9 +1,9 @@
-<!-- diary_app/templates/edit_profile.html -->
+
 {% extends 'base.html' %}
 
 {% block content %}
 <div class="container mt-5">
-    <h1>Редактировать профиль</h1>
+    <h1>Fix profile</h1>
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
         <div class="form-group">
@@ -12,7 +12,7 @@
         <div class="form-group">
             {{ profile_form.as_p }}
         </div>
-        <button type="submit" class="btn btn-primary">Сохранить изменения</button>
+        <button type="submit" class="btn btn-primary">Save changes</button>
     </form>
 </div>
 {% endblock %}

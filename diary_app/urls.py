@@ -15,7 +15,7 @@
 
 from django.urls import path, include
 from diary_app.views import Register, create_entry,home,password_reset_view
-from django.contrib import admin
+#from django.contrib import admin
 from . import views
 
 
@@ -29,12 +29,11 @@ urlpatterns = [
     path('templates/home/', home, name='home'),
     path('all_entries/', views.all_entries, name='all_entries'),
     path('create_entry/', views.create_entry, name='create_entry'),
-    path('register/', views.Register.as_view(), name='register'),
     path('templates/register/', Register.as_view(), name='register'),
     path('password_reset/done/', views.password_reset_done, name='password_reset_done'),
     path('password_reset/', password_reset_view, name='password_reset'),
     path('entries/new/', create_entry, name='create_entry'),
-    path('entry/<int:entry_id>/', views.entry_detail, name='entry_detail'),
+    #path('entry/<int:entry_id>/', views.all_entries, name='entry_detail'),
 
 ]
 ##################################################

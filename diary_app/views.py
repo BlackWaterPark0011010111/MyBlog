@@ -28,20 +28,27 @@ import logging
 from .forms import SearchForm
 from django.urls import reverse
 logger = logging.getLogger(__name__)
+from django.db.models import Q
 
-def entry_detail(request, entry_id):
-    entry = get_object_or_404(Entry, id=entry_id)
-    return render(request, 'entry_detail.html', {'entry': entry})
-
-
+#def entry_detail(request, entry_id):
+#    entry = get_object_or_404(Entry, pk=entry_id)
+#    return render(request, 'templates/all_entries.html', {'entry': entry})
 
 def search_entries(request):
     query = request.GET.get('query')
+    print(".................", query)
     if query:
-        results = Entry.objects.filter(title__icontains=query)  # Пример поиска по заголовку
+        results = Entry.objects.filter(Q(title__icontains=query) | Q(text__icontains=query))
     else:
         results = Entry.objects.none()
     return render(request, 'search_results.html', {'results': results})
+#def search_entries(request):
+#    query = request.GET.get('query')
+#    if query:
+#        results = Entry.objects.filter(title__icontains=query)  # Пример поиска по заголовку
+#    else:
+#        results = Entry.objects.none()
+#    return render(request, 'search_results.html', {'results': results})
 
 #ef search_entries(request):
 #   query = request.GET.get('query')
@@ -84,19 +91,30 @@ def index(request):
         return redirect('home')
     else:
         return redirect('login')
-#@login_required
-#def home(request):
-#    posts = Post.objects.all().order_by('-publish')[:5]  # Получить последние 5 записей, отсортированных по дате публикации
-#    return render(request, 'home.html', {'posts': posts})
+
+
 
 @login_required
 def all_entries(request):
     entries = Entry.objects.all()  
-    print('..............',entries)
+    print('Entries:', entries)
 
-    return render(request, 'diary_app/home.html', {'posts': entries})
-    
+    return render(request, 'all_entries.html', {'entries': entries})
 
+def create_entry(request):
+    if request.method == 'POST':
+        form = EntryForm(request.POST, request.FILES)
+        if form.is_valid():
+            entry = form.save(commit=False)
+            entry.author = request.user
+            entry.save()
+            return redirect('home')
+        else:
+            print(form.errors)  
+            # Вывод ошибок в консоль для отладки
+    else:
+        form = EntryForm()
+    return render(request, 'create_entry.html', {'form': form})
 
 class Register(View):
     template_name = 'registration/register.html'
@@ -122,20 +140,8 @@ class Register(View):
         }
         return render(request, self.template_name, context)
 
+
+
 def logout_view(request):
     logout(request)
     return redirect('home') 
-
-
-@login_required
-def create_entry(request):
-    if request.method == 'POST':
-        form = EntryForm(request.POST)
-        if form.is_valid():
-            entry = form.save(commit=False)
-            entry.author = request.user
-            entry.save()
-            return redirect('home')
-    else:
-        form = EntryForm()
-    return render(request, 'create_entry.html', {'form': form})     # return HttpResponse('<h1>Hello HttpResponse</h1>')  для тестинга 
